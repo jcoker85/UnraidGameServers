@@ -6,6 +6,8 @@ To update to a newer version of the game, just restart the container.
 
 ## Goldeneye Source Dedicated Server
 
+**NOTE:** After initial server startup, you can customize the server configuration by accessing geserver/gesource/cfg/server.cfg. 
+
 ### Example Env params 
 | Name               | Value                                 | Example              |
 |--------------------|---------------------------------------|----------------------|
