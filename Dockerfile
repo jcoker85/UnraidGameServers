@@ -1,40 +1,18 @@
 FROM ich777/winehq-baseimage
 
-LABEL org.opencontainers.image.authors="admin@minenet.at"
-LABEL org.opencontainers.image.source="https://github.com/ich777/docker-steamcmd-server"
+ENV MAP="ge_archives"
+ENV MAXPLAYERS="10"
+ENV PORT_INCREMENT="0"
 
-RUN apt-get update && \
-	apt-get -y install lib32gcc-s1 winbind xvfb screen cabextract && \
-	wget -q -O /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
-	chmod +x /usr/bin/winetricks && chown 755 /usr/bin/winetricks && \
-	rm -rf /var/lib/apt/lists/*
+RUN dpkg --add-architecture i386 && \
+    apt update && \
+    apt install -y tar lib32gcc-s1 p7zip-full winbind xvfb && \
+    mkdir -p /servers/geserver && \
+    mkdir /servers/steamcmd && \
+    useradd -d /servers -s /bin/bash steam
 
-ENV DATA_DIR="/serverdata"
-ENV STEAMCMD_DIR="${DATA_DIR}/steamcmd"
-ENV SERVER_DIR="${DATA_DIR}/serverfiles"
-ENV GAME_ID="template"
-ENV GAME_NAME="template"
-ENV GAME_PARAMS="template"
-ENV GAME_PORT=27015
-ENV VALIDATE=""
-ENV UMASK=000
-ENV UID=99
-ENV GID=100
-ENV USERNAME=""
-ENV PASSWRD=""
-ENV USER="steam"
-ENV DATA_PERM=770
+COPY ./GoldenEye_Source_v5.0.6_full_server_windows.7z /servers
+COPY ./scripts/startup.sh /servers
+COPY ./scripts/server.sh /servers
 
-RUN mkdir $DATA_DIR && \
-	mkdir $STEAMCMD_DIR && \
-	mkdir $SERVER_DIR && \
-	useradd -d $DATA_DIR -s /bin/bash $USER && \
-	chown -R $USER $DATA_DIR && \
-	ulimit -n 2048
-
-ADD /scripts/ /opt/scripts/
-RUN chmod -R 770 /opt/scripts/
-COPY Engine.ini /opt/Engine.ini
-
-#Server Start
-ENTRYPOINT ["/opt/scripts/start.sh"]
+ENTRYPOINT ["/servers/startup.sh"]

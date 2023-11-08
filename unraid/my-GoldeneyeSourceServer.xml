@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>GoldeneyeSourceServer</Name>
+  <Repository>jcoker85/goldeneyesourceserver</Repository>
+  <Registry>https://hub.docker.com/r/jcoker85/goldeneyesourceserver</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://www.steampowered.com/</Project>
+  <Overview>This Docker container will install SteamCMD and start a Goldeneye Source Server.</Overview>
+  <Category>GameServers:</Category>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/jcoker85/GoldeneyeSourceServer/main/gsstransparent.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>1674716848</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Server Data" Target="/servers/geserver" Default="" Mode="rw" Description="" Type="Path" Display="always" Required="true" Mask="false">/mnt/cache/appdata/goldeneyesourceserver</Config>
+  <Config Name="Port Increment" Target="PORT_INCREMENT" Default="0" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">5</Config>
+  <Config Name="Map" Target="MAP" Default="ge_archives" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">ge_depot</Config>
+  <Config Name="Max Player Count" Target="MAXPLAYERS" Default="10" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">10</Config>
+  <Config Name="TCP Port" Target="27020" Default="27015" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">27020</Config>
+  <Config Name="UDP Port" Target="27020" Default="" Mode="udp" Description="" Type="Port" Display="always" Required="true" Mask="false">27020</Config>
+  <Config Name="Client Port" Target="27010" Default="" Mode="udp" Description="" Type="Port" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Steam Port" Target="26905" Default="" Mode="udp" Description="" Type="Port" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="SourceTV Port" Target="27025" Default="" Mode="udp" Description="" Type="Port" Display="advanced" Required="false" Mask="false"/>
+</Container>
