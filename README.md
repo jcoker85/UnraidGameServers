@@ -1,30 +1,31 @@
-# SteamCMD in Docker optimized for Unraid
-This Docker will download and install SteamCMD. It will also install Swords 'n Magic and Stuff and run it.
+# SteamCMD Docker Dedicated Game Server for Unraid
+This will download and install SteamCMD and the associated dedicated game server.
 
-**NOTE:** Make sure to fill out the name, owner, and password environment variables prior to starting the server!
+**NOTE:** Please allow about 5 minutes for initial container startup with a good Internet connection. The game files and necessary runtimes only need to be downloaded once. 
+To update to a newer version of the game, just restart the container. If you want to install a beta version of the game, change the GAME_ID parameter value to: 
+```GAME_ID -beta BRANCH_NAME``` (e.g. ```294420 -beta latest_experimental``` would download the 7 Days to Die dedicated server from the latest_experimental branch).
 
-**ATTENTION:** First startup can take very long since it downloads the gameserver files and it also installs the runtimes which can take quite some time! 
+## Swords 'n Magic and Stuff Dedicated Server
 
-**First Start Notice:** On First startup the container installs the necessary runtimes and it might seem that the container hangs but please be patient since the installation can take very long on some systems (5 minutes+).
+**NOTE:** The name of the server must be 2-5 of the allowed words found in Saved/Logs/AllowedWords.txt. You can use the default name to start the server and check this file
 
-Update Notice: Simply restart the container if a newer version of the game is available.
 
-## Example Env params 
-| Name | Value                                                                                                                                                                                                                                                 | Example                 |
-| --- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
-| STEAMCMD_DIR | Folder for SteamCMD                                                                                                                                                                                                                                   | /serverdata/steamcmd    |
-| SERVER_DIR | Folder for gamefile                                                                                                                                                                                                                                   | /serverdata/serverfiles |
-| GAME_ID | The GAME_ID that the container downloads at startup. If you want to install a static or beta version of the game change the value to: '2089300 -beta YOURBRANCH' (without quotes, replace YOURBRANCH with the branch or version you want to install). | 2058450                 |
-| SNM_NAME | Name of the server                                                                                                                                                                                                                                    | Turtle Market Puzzle    |
-| SNM_OWNER_STEAM_ID | Steam ID of the server owner                                                                                                                                                                                                                          | 1234567890              |
-| SNM_PASSWORD | Password of the server | docker                  |
-| UID | User Identifier                                                                                                                                                                                                                                       | 99                      |
-| GID | Group Identifier                                                                                                                                                                                                                                      | 100                     |
-| VALIDATE | Validates the game data                                                                                                                                                                                                                               | false                   |
-| USERNAME | Leave blank for anonymous login                                                                                                                                                                                                                       | blank                   |
-| PASSWRD | Leave blank for anonymous login                                                                                                                                                                                                                       | blank                   |
+### Example Env params 
+| Name               | Value                                                       | Example                 |
+|--------------------|-------------------------------------------------------------|-------------------------|
+| STEAMCMD_DIR       | Folder for SteamCMD                                         | /serverdata/steamcmd    |
+| SERVER_DIR         | Folder for gamefile                                         | /serverdata/serverfiles |
+| GAME_ID            | The application ID that the container downloads at startup. | 2058450                 |
+| SNM_NAME           | Name of the server                                          | Turtle Market Puzzle    |
+| SNM_OWNER_STEAM_ID | Steam ID of the server owner                                | 1234567890              |
+| SNM_PASSWORD       | Password of the server                                      | docker                  |
+| UID                | User Identifier                                             | 99                      |
+| GID                | Group Identifier                                            | 100                     |
+| VALIDATE           | Validates the game data                                     | false                   |
+| USERNAME           | Leave blank for anonymous login                             | blank                   |
+| PASSWRD            | Leave blank for anonymous login                             | blank                   |
 
-## Run example
+### Run example
 ```
 docker run --name SNMAS -d \
 	-p 7777:7777/udp -p 27015:27015/udp \
@@ -39,6 +40,4 @@ docker run --name SNMAS -d \
 	jcoker85/swordsnmagicandstuff
 ```
 
-This Docker was mainly edited for better use with Unraid, if you don't use Unraid you should definitely try it!
-
-This Docker is forked from mattieserver & ich777, thank you for this wonderful Docker.
+Heavily based off of https://github.com/ich777/docker-steamcmd-server. Thank you for your contributions!
