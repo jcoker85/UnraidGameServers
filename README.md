@@ -9,29 +9,19 @@ To update to a newer version of the game, just restart the container.
 **NOTE:** After initial server startup, you can customize the server configuration by accessing geserver/gesource/cfg/server.cfg. 
 
 ### Example Env params 
-| Name               | Value                                 | Example              |
-|--------------------|---------------------------------------|----------------------|
-| MAP                | Starting map                          | ge_caves             |
-| MAX_PLAYERS        | Maximum number of players             | 10                   |
-| PORT_INCREMENT     | Number to increment starting ports by | 5                    |
+| Name        | Value                     | Example     |
+|-------------|---------------------------|-------------|
+| MAP         | Starting map              | ge_caves    |
+| MAX_PLAYERS | Maximum number of players | 10          |
+| GAME_PARAMS | Game parameters           | -port 27030 |
 
 ### Run example
 ```
 docker run --name GESource -d \
-	-p 27015:27015/tcp -p 27015:27015/udp \
+	-p 27030:27030/tcp -p 27030:27030/udp \
 	--env 'MAP=ge_caves' \
 	--env 'MAX_PLAYERS=10' \
-	--volume /path/to/geserver:/servers/geserver \
-	jcoker85/goldeneyesourceserver
-```
-
-### Run example
-```
-docker run --name GESource -d \
-	-p 27020:27020/tcp -p 27020:27020/udp \
-	--env 'MAP=ge_caves' \
-	--env 'MAX_PLAYERS=4' \
-	--env 'PORT_INCREMENT=5' \
+	--env 'GAME_PARAMS=-port 27030' \
 	--volume /path/to/geserver:/servers/geserver \
 	jcoker85/goldeneyesourceserver
 ```
