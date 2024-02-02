@@ -65,6 +65,7 @@ if [ ! -d ${SERVER_DIR}/WINE64 ]; then
 else
 	echo "---WINE workdirectory found---"
 fi
+
 echo "---Checking if WINE is properly installed---"
 if [ ! -d ${SERVER_DIR}/WINE64/drive_c/windows ]; then
 	echo "---Setting up WINE---"
@@ -74,25 +75,6 @@ if [ ! -d ${SERVER_DIR}/WINE64/drive_c/windows ]; then
     wineserver -k >/dev/null 2>&1
 else
 	echo "---WINE properly set up---"
-fi
-
-echo "---Checking if runtimes are installed---"
-if [ ! -f ${SERVER_DIR}/runtimes ]; then
-  echo "---Runtimes not installed, please wait installing...---"
-  find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
-  /opt/scripts/start-Xvfb.sh 2>/dev/null &
-  echo "---...this can take some time...---"
-  sleep 5
-  /usr/bin/winetricks -q dotnet45 2>/dev/null
-  /usr/bin/winetricks -q vcrun2019 2>/dev/null
-  wine64 ${SERVER_DIR}/SNMASServer.exe -log ${GAME_PARAMS} >/dev/null 2&>1 &
-  sleep 10
-  wineserver -k >/dev/null 2>&1
-  kill $(pidof Xvfb) 2>/dev/null
-  touch ${SERVER_DIR}/runtimes
-  echo "---Installation from runtimes finished!---"
-else
-  echo "---Runtimes found! Continuing...---"
 fi
 
 echo "---Looking 'Engine.ini' file is in place---"
