@@ -17,7 +17,7 @@
     <Category>GameServers:</Category>
     <WebUI/>
     <TemplateURL/>
-    <Icon>https://raw.githubusercontent.com/jcoker85/docker-steamcmd-server/sunkenland/sunkenland.ico</Icon>
+    <Icon>https://raw.githubusercontent.com/jcoker85/unraidgameservers/sunkenland/sunkenland.ico</Icon>
     <ExtraParams>--restart=unless-stopped</ExtraParams>
     <PostArgs/>
     <CPUset/>

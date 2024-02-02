@@ -5,6 +5,13 @@ This will download and install SteamCMD and the associated dedicated game server
 To update to a newer version of the game, just restart the container. If you want to install a beta version of the game, change the GAME_ID parameter value to: 
 ```GAME_ID -beta BRANCH_NAME``` (e.g. ```294420 -beta latest_experimental``` would download the 7 Days to Die dedicated server from the latest_experimental branch).
 
+**NOTE:** To adjust the world name, go into your server files directory, then go to "/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3 Studio/Sunkenland/Worlds" and
+change the name of the folder. To change the description, you can edit the WorldSetting.json file inside of this directory. You can also provide your own world directory
+by deleting the existing one and using your own - just make sure it is called SunkenlandDocker when you create the world. You will need to update the worldGuid in the 
+Game Parameters section as well. 
+
+**NOTE:** You can use the Game Parameters section to add several options, see here for more details: https://www.sunkenlandgame.com/post/dedicated-server-user-manual
+
 ## Sunkenland Dedicated Server
 
 ### Example Env params 
