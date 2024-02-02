@@ -12,8 +12,7 @@ RUN dpkg --add-architecture i386 && \
     mkdir /servers/steamcmd && \
     useradd -d /servers -s /bin/bash steam
 
-COPY ./GoldenEye_Source_v5.0.6_full_server_windows.7z /servers
-COPY ./scripts/startup.sh /servers
-COPY ./scripts/server.sh /servers
+COPY /GoldenEye_Source_v5.0.6_full_server_windows.7z /servers
+COPY /scripts/ /servers
 
 ENTRYPOINT ["/servers/startup.sh"]
