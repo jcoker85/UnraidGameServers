@@ -76,35 +76,9 @@ else
 	echo "---WINE properly set up---"
 fi
 
-echo "---Checking if runtimes are installed---"
-if [ ! -f ${SERVER_DIR}/runtimes ]; then
-  echo "---Runtimes not installed, please wait installing...---"
-  find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
-  /opt/scripts/start-Xvfb.sh 2>/dev/null &
-  echo "---...this can take some time...---"
-  sleep 5
-  /usr/bin/winetricks -q dotnet45 2>/dev/null
-  /usr/bin/winetricks -q vcrun2019 2>/dev/null
-  wine64 ${SERVER_DIR}/SNMASServer.exe -log ${GAME_PARAMS} >/dev/null 2&>1 &
-  sleep 10
-  wineserver -k >/dev/null 2>&1
-  kill $(pidof Xvfb) 2>/dev/null
-  touch ${SERVER_DIR}/runtimes
-  echo "---Installation from runtimes finished!---"
-else
-  echo "---Runtimes found! Continuing...---"
-fi
-
-echo "---Looking 'Engine.ini' file is in place---"
-if [ ! -f ${SERVER_DIR}/SNM2020/Saved/Config/WindowsServer/Engine.ini ]; then
-  echo "---'Engine.ini' not found, copying template...---"
-  if [ ! -d ${SERVER_DIR}/SNM2020/Saved/Config/WindowsServer ]; then
-    mkdir -p ${SERVER_DIR}/SNM2020/Saved/Config/WindowsServer
-  fi
-  cp /opt/Engine.ini ${SERVER_DIR}/SNM2020/Saved/Config/WindowsServer/
-else
-  echo "---'Engine.ini' found---"
-fi
+echo "---Copying default world for Sunkenland ---"
+mkdir -p ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
+cp -R /tmp/Sunkenland~9966a2bb-37f0-40d2-ac43-789cdb58eaf7 ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
 
 echo "---Checking for old display lock files---"
 find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
@@ -119,12 +93,12 @@ echo "---Server ready---"
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-if [ ! -f ${SERVER_DIR}/SNMASServer.exe ]; then
+if [ ! -f ${SERVER_DIR}/Sunkenland-DedicatedServer.exe ]; then
   echo "---Something went wrong, can't find the executable, putting container into sleep mode!---"
   sleep infinity
 else
-  screen -S SNMAS -d -m wine64 ${SERVER_DIR}/SNMASServer.exe -log ${GAME_PARAMS}
+  screen -S Sunkenland -d -m wine64 ${SERVER_DIR}/Sunkenland-DedicatedServer.exe -nographics -batchmode -logFile ${SERVER_DIR}/sunk.log ${GAME_PARAMS}
   sleep 2
   /opt/scripts/start-watchdog.sh &
-  tail -n 9999 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log
+  tail -n 9999 -f ${SERVER_DIR}/sunk.log
 fi

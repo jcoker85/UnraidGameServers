@@ -22,14 +22,12 @@ fi
 echo "---Taking ownership of data...---"
 chown -R root:${GID} /opt/scripts
 chmod -R 750 /opt/scripts
-chown ${UID}:${GID} /opt/Engine.ini
-chmod 750 /opt/Engine.ini
 chown -R ${UID}:${GID} ${DATA_DIR}
 
 echo "---Starting...---"
 term_handler() {
-	kill -SIGINT $(pidof SNMASServer.exe)
-	tail --pid=$(pidof SNMASServer.exe) -f 2>/dev/null
+	kill -SIGINT $(pidof Sunkenland-DedicatedServer.exe)
+	tail --pid=$(pidof Sunkenland-DedicatedServer.exe) -f 2>/dev/null
 	exit 143;
 
 }

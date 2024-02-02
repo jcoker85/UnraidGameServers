@@ -34,7 +34,7 @@ RUN mkdir $DATA_DIR && \
 
 ADD /scripts/ /opt/scripts/
 RUN chmod -R 770 /opt/scripts/
-COPY Engine.ini /opt/Engine.ini
+COPY /Sunkenland~9966a2bb-37f0-40d2-ac43-789cdb58eaf7/ /tmp/Sunkenland~9966a2bb-37f0-40d2-ac43-789cdb58eaf7/
 
 #Server Start
 ENTRYPOINT ["/opt/scripts/start.sh"]
