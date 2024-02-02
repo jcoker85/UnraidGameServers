@@ -78,7 +78,7 @@ fi
 
 echo "---Copying default world for Sunkenland ---"
 mkdir -p ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
-cp -R /tmp/Sunkenland~9966a2bb-37f0-40d2-ac43-789cdb58eaf7 ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
+cp -R /tmp/SunkenlandDocker~9966a2bb-37f0-40d2-ac43-789cdb58eaf7 ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
 
 echo "---Checking for old display lock files---"
 find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
