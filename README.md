@@ -36,7 +36,7 @@ docker run --name Sunkenland -d \
 	--env 'UID=99' \
 	--env 'GID=100' \
 	--volume /path/to/steamcmd:/serverdata/steamcmd \
-	--volume /path/to/icarus:/serverdata/serverfiles \
+	--volume /path/to/sunkenland:/serverdata/serverfiles \
 	jcoker85/sunkenland
 ```
 
