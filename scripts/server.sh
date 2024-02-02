@@ -48,5 +48,5 @@ echo "---Server ready---"
 echo "---Start Server---"
 cd /servers/geserver
 Xvfb :99 & export DISPLAY=:99
-wine64 start srcds.exe -console -game gesource -port $((27015 + ${PORT_INCREMENT})) +clientport $((27005 + ${PORT_INCREMENT})) -sport $((26900 + ${PORT_INCREMENT})) +tv_port $((27020 + ${PORT_INCREMENT})) +maxplayers ${MAXPLAYERS} +map ${MAP}
+wine64 start srcds.exe -console -game gesource +maxplayers ${MAXPLAYERS} +map ${MAP} ${GAME_PARAMS}
 tail -f /dev/null
