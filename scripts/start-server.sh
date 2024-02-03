@@ -101,8 +101,8 @@ if [ ! -f ${SERVER_DIR}/Sunkenland-DedicatedServer.exe ]; then
   echo "---Something went wrong, can't find the executable, putting container into sleep mode!---"
   sleep infinity
 else
-  screen -S Sunkenland -d -m wine64 ${SERVER_DIR}/Sunkenland-DedicatedServer.exe -nographics -batchmode -logFile ${SERVER_DIR}/sunk.log ${GAME_PARAMS}
+  screen -S Sunkenland -d -m wine64 ${SERVER_DIR}/Sunkenland-DedicatedServer.exe -nographics -batchmode -logFile ${SERVER_DIR}/logs/sunkenland_$(date +"%d-%m-%Y").log ${GAME_PARAMS}
   sleep 2
   /opt/scripts/start-watchdog.sh &
-  tail -n 9999 -f ${SERVER_DIR}/sunk.log
+  tail -n 9999 -f ${SERVER_DIR}/logs/sunkenland_$(date +"%d-%m-%Y").log
 fi
