@@ -7,8 +7,7 @@ To update to a newer version of the game, just restart the container. If you wan
 
 **NOTE:** To adjust the world name, go into your server files directory, then go to "/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3 Studio/Sunkenland/Worlds" and
 change the name of the folder. To change the description, you can edit the WorldSetting.json file inside of this directory. You can also provide your own world directory
-by deleting the existing one and using your own - just make sure it is called SunkenlandDocker when you create the world. You will need to update the worldGuid in the 
-Game Parameters section as well. 
+by deleting the existing one and using your own. Make sure to update the worldGuid in the Game Parameters section if you use your own world. 
 
 **NOTE:** You can use the Game Parameters section to add several options, see here for more details: https://www.sunkenlandgame.com/post/dedicated-server-user-manual
 
