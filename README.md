@@ -30,7 +30,7 @@ Game Parameters section as well.
 ### Run example
 ```
 docker run --name Sunkenland -d \
-	-p 52160:52160/udp -p 52161:52161/udp -p 27015:27015/udp \
+	-p 27015:27015/udp \
 	--env 'GAME_ID=2667530' \
 	--env 'GAME_PARAMS=-worldGuid 9966a2bb-37f0-40d2-ac43-789cdb58eaf7' \
 	--env 'UID=99' \
