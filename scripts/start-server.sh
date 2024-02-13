@@ -92,9 +92,6 @@ echo "---Starting Xvfb server---"
 screen -S Xvfb -d -m /opt/scripts/start-Xvfb.sh
 sleep 5
 
-chmod -R ${DATA_PERM} ${DATA_DIR}
-echo "---Server ready---"
-
 echo "---Start Server---"
 cd ${SERVER_DIR}
 if [ ! -f ${SERVER_DIR}/Sunkenland-DedicatedServer.exe ]; then
