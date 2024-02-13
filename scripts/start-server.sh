@@ -116,8 +116,8 @@ if [ ! -f ${SERVER_DIR}/SNMASServer.exe ]; then
   sleep infinity
 else
   screen -S SNMAS -d -m wine64 ${SERVER_DIR}/SNMASServer.exe -log ${GAME_PARAMS}
-  export CURDATE=$(date +"%Y-%m-%dT%H%M")
+  export LATEST_LOG=$(find ${SERVER_DIR}/SNM2020/Saved/Logs/ -type f -name "SnMDedSrv*" -exec ls -t1 {} + | tail -n+1 | head -1)
   sleep 2
   /opt/scripts/start-watchdog.sh &
-  tail -n 25 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log ${SERVER_DIR}/SNM2020/Saved/Logs/SnMDedSrv-${CURDATE}*.log
+  tail -n 25 -s 10 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log ${LATEST_LOG}
 fi
