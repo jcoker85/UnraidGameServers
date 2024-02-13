@@ -81,13 +81,8 @@ if [ ! -f ${SERVER_DIR}/runtimes ]; then
   echo "---Runtimes not installed, please wait installing...---"
   find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
   /opt/scripts/start-Xvfb.sh 2>/dev/null &
-  echo "---...this can take some time...---"
   sleep 5
-  /usr/bin/winetricks -q dotnet45 2>/dev/null
   /usr/bin/winetricks -q vcrun2019 2>/dev/null
-  wine64 ${SERVER_DIR}/SNMASServer.exe -log ${GAME_PARAMS} >/dev/null 2&>1 &
-  sleep 10
-  wineserver -k >/dev/null 2>&1
   kill $(pidof Xvfb) 2>/dev/null
   touch ${SERVER_DIR}/runtimes
   echo "---Installation from runtimes finished!---"
@@ -114,9 +109,6 @@ echo "---Starting Xvfb server---"
 screen -S Xvfb -d -m /opt/scripts/start-Xvfb.sh
 sleep 5
 
-chmod -R ${DATA_PERM} ${DATA_DIR}
-echo "---Server ready---"
-
 echo "---Start Server---"
 cd ${SERVER_DIR}
 if [ ! -f ${SERVER_DIR}/SNMASServer.exe ]; then
@@ -124,7 +116,8 @@ if [ ! -f ${SERVER_DIR}/SNMASServer.exe ]; then
   sleep infinity
 else
   screen -S SNMAS -d -m wine64 ${SERVER_DIR}/SNMASServer.exe -log ${GAME_PARAMS}
+  export CURDATE=$(date +"%Y-%m-%dT%H%M")
   sleep 2
   /opt/scripts/start-watchdog.sh &
-  tail -n 9999 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log
+  tail -n 9999 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log ${SERVER_DIR}/SNM2020/Saved/Logs/SnMDedSrv-${CURDATE}*.log
 fi
