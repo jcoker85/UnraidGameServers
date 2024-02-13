@@ -119,5 +119,5 @@ else
   export CURDATE=$(date +"%Y-%m-%dT%H%M")
   sleep 2
   /opt/scripts/start-watchdog.sh &
-  tail -n 9999 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log ${SERVER_DIR}/SNM2020/Saved/Logs/SnMDedSrv-${CURDATE}*.log
+  tail -n 25 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log ${SERVER_DIR}/SNM2020/Saved/Logs/SnMDedSrv-${CURDATE}*.log
 fi
