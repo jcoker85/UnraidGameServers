@@ -1,7 +1,7 @@
 {
 	"ApplicationVersion" : {
 		"__type" : "string",
-		"value" : "0.2.0"
+		"value" : "0.2.12"
 	},
 	"WorldSettingProfile" : {
 		"__type" : "WorldSettingProfile,Assembly-CSharp",
@@ -11,6 +11,7 @@
 			"enemyGarrisonDifficulty" : 2,
 			"enemyRaidDifficulty" : 2,
 			"survivalDifficulty" : 1,
+			"isDeathPenaltiesEnabled" : true,
 			"isFriendlyFireEnabled" : false,
 			"isResearchShared" : true,
 			"isMapShared" : true,
