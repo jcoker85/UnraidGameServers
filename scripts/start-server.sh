@@ -79,7 +79,7 @@ fi
 echo "---Copying default world for Sunkenland ---"
 if [ ! -d ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds ]; then
   mkdir -p ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
-  cp -R /tmp/SunkenlandDocker~9966a2bb-37f0-40d2-ac43-789cdb58eaf7 ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
+  cp -R /tmp/SunkenlandDocker~9f3ed663-7773-4e07-9eb2-aa463c61f920 ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
 else
 	echo "---World already detected---"
 fi

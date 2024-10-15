@@ -19,7 +19,7 @@ by deleting the existing one and using your own. Make sure to update the worldGu
 | STEAMCMD_DIR       | Folder for SteamCMD                                         | /serverdata/steamcmd                            |
 | SERVER_DIR         | Folder for gamefile                                         | /serverdata/serverfiles                         |
 | GAME_ID            | The application ID that the container downloads at startup. | 2667530                                         |
-| GAME_PARAMS        | Game parameters for the server                              | -worldGuid 9966a2bb-37f0-40d2-ac43-789cdb58eaf7 |
+| GAME_PARAMS        | Game parameters for the server                              | -worldGuid 9f3ed663-7773-4e07-9eb2-aa463c61f920 |
 | UID                | User Identifier                                             | 99                                              |
 | GID                | Group Identifier                                            | 100                                             |
 | VALIDATE           | Validates the game data                                     | false                                           |
@@ -31,7 +31,7 @@ by deleting the existing one and using your own. Make sure to update the worldGu
 docker run --name Sunkenland -d \
 	-p 27015:27015/udp \
 	--env 'GAME_ID=2667530' \
-	--env 'GAME_PARAMS=-worldGuid 9966a2bb-37f0-40d2-ac43-789cdb58eaf7' \
+	--env 'GAME_PARAMS=-worldGuid 9f3ed663-7773-4e07-9eb2-aa463c61f920' \
 	--env 'UID=99' \
 	--env 'GID=100' \
 	--volume /path/to/steamcmd:/serverdata/steamcmd \
