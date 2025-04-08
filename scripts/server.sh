@@ -4,7 +4,7 @@
 if [ ! -f /servers/steamcmd/steamcmd.sh ]; then
     echo "---Installing SteamCMD---"
     wget -O /servers/steamcmd/steamcmd_linux.tar.gz http://media.steampowered.com/client/steamcmd_linux.tar.gz && \
-    tar -xvzf /servers/steamcmd/steamcmd_linux.tar.gz -C /servers/steamcmd
+    tar -xvzf /servers/steamcmd/steamcmd_linux.tar.gz -C /servers/steamcmd && \
     rm /servers/steamcmd/steamcmd_linux.tar.gz
 else
   echo "---SteamCMD already installed---"
@@ -18,10 +18,34 @@ else
 fi
 if [ ! -d /servers/geserver/gesource ]; then
   echo "---Installing Goldeneye Source Server---"
-  7z x -y -o/servers/geserver /servers/GoldenEye_Source_v5.0.6_full_server_windows.7z
-  rm /servers/GoldenEye_Source_v5.0.6_full_server_windows.7z
+  7z x -y -o/servers/geserver /servers/GoldenEye_Source_v5.0.6_full_server_windows.7z && \
+  rm /servers/GoldenEye_Source_v5.0.6_full_server_windows.7z && \
+  chmod -R 770 /servers/geserver/gesource
 else
   echo "---Goldeneye Source Server already installed---"
+fi
+if [[ "$INSTALL_MODS" == "true" ]]; then
+  if [ ! -d /servers/geserver/gesource/addons/metamod ]; then
+    echo "---Installing Metamod:Source---"
+    wget -O /servers/geserver/gesource/metamod.zip https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1217-windows.zip && \
+    7z x -y -o/servers/geserver/gesource/ /servers/geserver/gesource/metamod.zip  && \
+    rm /servers/geserver/gesource/metamod.zip && \
+    chmod -R 770 /servers/geserver/gesource/addons
+  else
+    echo "---Metamod:Source already installed---"
+  fi
+  if [ ! -d /servers/geserver/gesource/addons/sourcemod ]; then
+    echo "---Installing Sourcemod---"
+    wget -O /servers/geserver/gesource/sourcemod.zip https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git7196-windows.zip && \
+    7z x -y -o/servers/geserver/gesource/ /servers/geserver/gesource/sourcemod.zip  && \
+    rm /servers/geserver/gesource/sourcemod.zip && \
+    chmod -R 770 /servers/geserver/gesource/addons && \
+    chmod -R 770 /servers/geserver/gesource/cfg/sourcemod
+  else
+    echo "---Sourcemod already installed---"
+  fi
+else
+  echo "---INSTALL_MODS is not set to true, so not installing Metamod:Source or Sourcemod---"
 fi
 
 export WINEARCH=win64
@@ -44,6 +68,10 @@ fi
 echo "---Checking for old display lock files---"
 find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
 echo "---Server ready---"
+
+echo "---Copy config.vdf to enable VAC---"
+mkdir -p /servers/geserver/config
+mv /servers/config.vdf /servers/geserver/config/config.vdf
 
 echo "---Start Server---"
 cd /servers/geserver

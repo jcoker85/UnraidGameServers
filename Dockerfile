@@ -2,8 +2,8 @@ FROM ich777/winehq-baseimage
 
 ENV MAP="ge_archives"
 ENV MAXPLAYERS="10"
-ENV PORT_INCREMENT="0"
 ENV GAME_PARAMS="template"
+ENV INSTALL_MODS="false"
 
 RUN dpkg --add-architecture i386 && \
     apt update && \
