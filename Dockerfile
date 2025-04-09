@@ -1,8 +1,5 @@
 FROM ich777/winehq-baseimage
 
-LABEL org.opencontainers.image.authors="admin@minenet.at"
-LABEL org.opencontainers.image.source="https://github.com/ich777/docker-steamcmd-server"
-
 RUN apt-get update && \
 	apt-get -y install lib32gcc-s1 xvfb screen cabextract && \
 	wget -q -O /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
@@ -12,9 +9,12 @@ RUN apt-get update && \
 ENV DATA_DIR="/serverdata"
 ENV STEAMCMD_DIR="${DATA_DIR}/steamcmd"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
-ENV GAME_ID="template"
-ENV GAME_NAME="template"
-ENV GAME_PARAMS="template"
+ENV SNM_NAME="Turtle Market Puzzle"
+ENV SNM_OWNER_STEAM_ID=""
+ENV SNM_PASSWORD=""
+ENV SNM_MAX_PLAYERS=16
+ENV GAME_ID=2058450
+ENV GAME_PARAMS=""
 ENV GAME_PORT=27015
 ENV VALIDATE=""
 ENV UMASK=000
