@@ -31,4 +31,4 @@ docker run --name ArmaReforger -d \
 	jcoker85/armareforger
 ```
 
-Heavily based off of https://github.com/ich777/docker-steamcmd-server. Thank you for your contributions!
+Heavily based off of https://github.com/ich777/docker-steamcmd-server and https://github.com/acemod/docker-reforger. Thank you for your contributions!
