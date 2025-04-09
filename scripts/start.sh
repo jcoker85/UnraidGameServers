@@ -19,9 +19,11 @@ else
     echo "---No optional script found, continuing---"
 fi
 
-echo "---Copy config data---"
-cp /tmp/default-config.json ${SERVER_DIR}/default-config.json
-chmod 770 ${SERVER_DIR}/default-config.json
+echo "---Copy config data if it does not already exist---"
+if [ ! -f ${SERVER_DIR}/default-config.json ]; then
+  cp /tmp/default-config.json ${SERVER_DIR}/default-config.json
+  chmod 770 ${SERVER_DIR}/default-config.json
+fi
 
 echo "---Taking ownership of data...---"
 chown -R root:${GID} /opt/scripts
