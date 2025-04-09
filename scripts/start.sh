@@ -19,6 +19,10 @@ else
     echo "---No optional script found, continuing---"
 fi
 
+echo "---Copy config data---"
+cp /tmp/default-config.json ${SERVER_DIR}/default-config.json
+chmod 770 ${SERVER_DIR}/default-config.json
+
 echo "---Taking ownership of data...---"
 chown -R root:${GID} /opt/scripts
 chmod -R 750 /opt/scripts
@@ -26,10 +30,9 @@ chown -R ${UID}:${GID} ${DATA_DIR}
 
 echo "---Starting...---"
 term_handler() {
-	kill -SIGINT $(pidof Sunkenland-DedicatedServer.exe)
-	tail --pid=$(pidof Sunkenland-DedicatedServer.exe) -f 2>/dev/null
+	kill -SIGTERM "$killpid"
+	wait "$killpid" -f 2>/dev/null
 	exit 143;
-
 }
 
 trap 'kill ${!}; term_handler' SIGTERM
