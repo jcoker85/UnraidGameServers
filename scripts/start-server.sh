@@ -50,17 +50,28 @@ else
     fi
 fi
 
-echo "---Modify default configuration with env vars---"
+echo "---Modify default configuration with env vars if enabled---"
 cd ${SERVER_DIR}
-echo $(cat default-config.json | jq ".bindPort=${GAME_PORT}") > default-config.json
-echo $(cat default-config.json | jq ".publicPort=${GAME_PORT}") > default-config.json
-echo $(cat default-config.json | jq ".a2s.port=${A2S_PORT}") > default-config.json
-echo $(cat default-config.json | jq ".rcon.port=${RCON_PORT}") > default-config.json
-echo $(cat default-config.json | jq ".rcon.password=\"${RCON_PASSWORD}\"") > default-config.json
-echo $(cat default-config.json | jq ".game.name=\"${GAME_NAME}\"") > default-config.json
-echo $(cat default-config.json | jq ".game.password=\"${GAME_PASSWORD}\"") > default-config.json
-echo $(cat default-config.json | jq ".game.passwordAdmin=\"${GAME_PASSWORD_ADMIN}\"") > default-config.json
-echo $(cat default-config.json | jq ".game.scenarioId=\"${GAME_SCENARIO_ID}\"") > default-config.json
-echo $(cat default-config.json | jq ".game.maxPlayers=${GAME_MAX_PLAYERS}") > default-config.json
+if [ "${USE_ENV_VARS}" == "true" ]; then
+  cp default-config.json pre-config.json
+  echo $(cat pre-config.json | jq ".bindPort=${GAME_PORT}") > pre-config.json
+  echo $(cat pre-config.json | jq ".publicPort=${GAME_PORT}") > pre-config.json
+  echo $(cat pre-config.json | jq ".a2s.port=${A2S_PORT}") > pre-config.json
+  echo $(cat pre-config.json | jq ".rcon.port=${RCON_PORT}") > pre-config.json
+  echo $(cat pre-config.json | jq ".rcon.password=\"${RCON_PASSWORD}\"") > pre-config.json
+  echo $(cat pre-config.json | jq ".game.name=\"${GAME_NAME}\"") > pre-config.json
+  echo $(cat pre-config.json | jq ".game.password=\"${GAME_PASSWORD}\"") > pre-config.json
+  echo $(cat pre-config.json | jq ".game.passwordAdmin=\"${GAME_PASSWORD_ADMIN}\"") > pre-config.json
+  echo $(cat pre-config.json | jq ".game.scenarioId=\"${GAME_SCENARIO_ID}\"") > pre-config.json
+  echo $(cat pre-config.json | jq ".game.maxPlayers=${GAME_MAX_PLAYERS}") > pre-config.json
+  cat pre-config.json | jq "." > default-config.json
+  rm pre-config.json
+else
+  cp default-config.json pre-config.json
+  cat pre-config.json | jq "." > default-config.json
+  rm pre-config.json
+fi
+
 echo "---Start Server---"
+sleep 2
 ./ArmaReforgerServer -config ${SERVER_DIR}/default-config.json -profile ${PROFILE_DIR} -maxFPS ${MAX_FPS} ${GAME_PARAMS}
