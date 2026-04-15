@@ -76,40 +76,9 @@ else
 	echo "---WINE properly set up---"
 fi
 
-#echo "---Checking if runtimes are installed---"
-#if [ ! -f ${SERVER_DIR}/runtimes ]; then
-#  echo "---Runtimes not installed, please wait installing...---"
-#  find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
-#  /opt/scripts/start-Xvfb.sh 2>/dev/null &
-#  sleep 5
-#  /usr/bin/winetricks -q vcrun2019 2>/dev/null
-#  kill $(pidof Xvfb) 2>/dev/null
-#  touch ${SERVER_DIR}/runtimes
-#  echo "---Installation from runtimes finished!---"
-#else
-#  echo "---Runtimes found! Continuing...---"
-#fi
-
 echo "---Checking for old display lock files---"
 find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
 chmod -R ${DATA_PERM} ${DATA_DIR}
-
-#echo "---Starting Xvfb server---"
-#screen -S Xvfb -d -m /opt/scripts/start-Xvfb.sh
-#sleep 5
-#
-#echo "---Start Server---"
-#cd ${SERVER_DIR}
-#if [ ! -f ${SERVER_DIR}/SNMASServer.exe ]; then
-#  echo "---Something went wrong, can't find the executable, putting container into sleep mode!---"
-#  sleep infinity
-#else
-#  screen -S SNMAS -d -m wine64 ${SERVER_DIR}/SNMASServer.exe -log ${GAME_PARAMS}
-#  export LATEST_LOG=$(find ${SERVER_DIR}/SNM2020/Saved/Logs/ -type f -name "SnMDedSrv*" -exec ls -t1 {} + | tail -n+1 | head -1)
-#  sleep 2
-#  /opt/scripts/start-watchdog.sh &
-#  tail -n 25 -s 10 -f ${SERVER_DIR}/SNM2020/Saved/Logs/SNM2020.log ${LATEST_LOG}
-#fi
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
