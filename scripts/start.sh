@@ -19,10 +19,6 @@ else
     echo "---No optional script found, continuing---"
 fi
 
-echo "---Copy config data---"
-cp /tmp/default-config.json ${SERVER_DIR}/default-config.json
-chmod 770 ${SERVER_DIR}/default-config.json
-
 echo "---Taking ownership of data...---"
 chown -R root:${GID} /opt/scripts
 chmod -R 750 /opt/scripts
@@ -30,8 +26,8 @@ chown -R ${UID}:${GID} ${DATA_DIR}
 
 echo "---Starting...---"
 term_handler() {
-	kill -SIGTERM "$killpid"
-	wait "$killpid" -f 2>/dev/null
+	kill -SIGINT $(pidof WindroseServer-Win64-Shipping.exe)
+	tail --pid=$(pidof WindroseServer-Win64-Shipping.exe) -f 2>/dev/null
 	exit 143;
 }
 
