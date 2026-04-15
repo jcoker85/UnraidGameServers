@@ -13,7 +13,9 @@ To update to a newer version of the game, just restart the container. If you wan
 
 You can customize your server by modifying those two files. See here for more details: https://playwindrose.com/dedicated-server-guide/
 
-Please note that there is no port forwarding required for this game, but it does rely on UPnP. 
+Please note that there is no port forwarding required for this game, but it does rely on UPnP.
+
+The invite code used to join the server will be in ServerDescription.json
 
 ### Run example
 ```
