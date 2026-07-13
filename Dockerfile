@@ -10,7 +10,7 @@ ENV DATA_DIR="/serverdata"
 ENV STEAMCMD_DIR="${DATA_DIR}/steamcmd"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_ID=2667530
-ENV GAME_PARAMS="-worldGuid 9f3ed663-7773-4e07-9eb2-aa463c61f920 -region us"
+ENV GAME_PARAMS="-worldGuid be56a0f5-3d50-447d-abf3-aaa5faa5c572 -region us"
 ENV GAME_PORT=27015
 ENV VALIDATE=""
 ENV UMASK=000
@@ -30,7 +30,7 @@ RUN mkdir $DATA_DIR && \
 
 ADD /scripts/ /opt/scripts/
 RUN chmod -R 770 /opt/scripts/
-COPY /SunkenlandDocker~9f3ed663-7773-4e07-9eb2-aa463c61f920/ /tmp/SunkenlandDocker~9f3ed663-7773-4e07-9eb2-aa463c61f920/
+COPY /SunkenlandDocker~be56a0f5-3d50-447d-abf3-aaa5faa5c572/ /tmp/SunkenlandDocker~be56a0f5-3d50-447d-abf3-aaa5faa5c572/
 
 #Server Start
 ENTRYPOINT ["/opt/scripts/start.sh"]

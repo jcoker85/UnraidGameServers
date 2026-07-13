@@ -8,15 +8,18 @@ To update to a newer version of the game, just restart the container. If you wan
 ## Sunkenland Dedicated Server
 
 **NOTE:** To adjust the world name, go into your server files directory, then go to "/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3 Studio/Sunkenland/Worlds" and
-change the name of the folder. To change the description, you can edit the WorldSetting.json file inside of this directory. You can also provide your own world directory
-by deleting the existing one and using your own. Make sure to update the worldGuid in the Game Parameters section if you use your own world.
+change the name of the folder. To change the description, you can edit the WorldSetting.json file inside of this directory. You can also provide your own Worlds directory
+by deleting the existing one and copying your own into the directory. Make sure to update the worldGuid in the Game Parameters section if you use your own world.
+
+**NOTE:** For version v0.8+, previous worlds are incompatible. To generate a new default world, just delete the existing Worlds directory and restart the container. Make sure 
+to update the worldGuid in the Game Parameters section. The worldGuid below is the one you should use if generating a new default world.
 
 **NOTE:** You can use the Game Parameters section to add several options, see here for more details: https://www.sunkenlandgame.com/post/dedicated-server-user-manual
 
 ### Example Environment Variables
 | Name               | Value                                              | Example                                                    |
 |--------------------|----------------------------------------------------|------------------------------------------------------------|
-| GAME_PARAMS        | Game parameters for the server (see documentation) | -worldGuid 9f3ed663-7773-4e07-9eb2-aa463c61f920 -region us |
+| GAME_PARAMS        | Game parameters for the server (see documentation) | -worldGuid be56a0f5-3d50-447d-abf3-aaa5faa5c572 -region us |
 
 **NOTE:** Please check the Dockerfile for other environment variables that can be set and what their defaults are.
 
@@ -24,7 +27,7 @@ by deleting the existing one and using your own. Make sure to update the worldGu
 ```
 docker run --name Sunkenland -d \
 	-p 27015:27015/udp \
-	--env 'GAME_PARAMS=-worldGuid 9f3ed663-7773-4e07-9eb2-aa463c61f920' \
+	--env 'GAME_PARAMS=-worldGuid be56a0f5-3d50-447d-abf3-aaa5faa5c572' \
 	--volume /path/to/steamcmd:/serverdata/steamcmd \
 	--volume /path/to/sunkenland:/serverdata/serverfiles \
 	jcoker85/sunkenland
