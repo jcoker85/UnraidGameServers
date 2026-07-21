@@ -18,13 +18,6 @@ else
     +quit
 fi
 
-echo "---Delete appmanifest file if stale to prevent 0x6 update error---"
-export MANIFEST="${SERVER_DIR}/steamapps/appmanifest_2667530.acf"
-if ! grep -qE '"buildid"[[:space:]]+"24150541"' "$MANIFEST"; then
-    echo "Old buildid. Deleting manifest."
-    rm -f "$MANIFEST"
-fi
-
 echo "---Update Server---"
 if [ "${USERNAME}" == "" ]; then
     if [ "${VALIDATE}" == "true" ]; then
@@ -86,7 +79,7 @@ fi
 echo "---Copying default world for Sunkenland ---"
 if [ ! -d ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds ]; then
   mkdir -p ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
-  cp -R /tmp/SunkenlandDocker~be56a0f5-3d50-447d-abf3-aaa5faa5c572 ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
+  cp -R /tmp/SunkenlandDocker~9f3ed663-7773-4e07-9eb2-aa463c61f920 ${SERVER_DIR}/WINE64/drive_c/users/steam/AppData/LocalLow/Vector3\ Studio/Sunkenland/Worlds
 else
 	echo "---World already detected---"
 fi
