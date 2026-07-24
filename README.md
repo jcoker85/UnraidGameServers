@@ -19,7 +19,7 @@ to update the worldGuid in the Game Parameters section. The worldGuid below is t
 ### Example Environment Variables
 | Name               | Value                                              | Example                                                    |
 |--------------------|----------------------------------------------------|------------------------------------------------------------|
-| GAME_PARAMS        | Game parameters for the server (see documentation) | -worldGuid b5460da7-91c5-4e59-98e3-510aa6805207 -region us |
+| GAME_PARAMS        | Game parameters for the server (see documentation) | -worldGuid 370c779b-d678-49d5-86b0-e793d94e55f8 -region us |
 
 **NOTE:** Please check the Dockerfile for other environment variables that can be set and what their defaults are.
 
@@ -27,7 +27,7 @@ to update the worldGuid in the Game Parameters section. The worldGuid below is t
 ```
 docker run --name Sunkenland -d \
 	-p 27015:27015/udp \
-	--env 'GAME_PARAMS=-worldGuid b5460da7-91c5-4e59-98e3-510aa6805207' \
+	--env 'GAME_PARAMS=-worldGuid 370c779b-d678-49d5-86b0-e793d94e55f8' \
 	--volume /path/to/steamcmd:/serverdata/steamcmd \
 	--volume /path/to/sunkenland:/serverdata/serverfiles \
 	jcoker85/sunkenland
