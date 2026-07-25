@@ -88,18 +88,15 @@ echo "---Checking for old display lock files---"
 find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
 chmod -R ${DATA_PERM} ${DATA_DIR}
 
-echo "---Starting Xvfb server---"
-screen -S Xvfb -d -m /opt/scripts/start-Xvfb.sh
-sleep 5
-
 echo "---Start Server---"
 cd ${SERVER_DIR}
 if [ ! -f ${SERVER_DIR}/Sunkenland-DedicatedServer.exe ]; then
   echo "---Something went wrong, can't find the executable, putting container into sleep mode!---"
   sleep infinity
 else
-  screen -S Sunkenland -d -m wine64 ${SERVER_DIR}/Sunkenland-DedicatedServer.exe -nographics -batchmode -logFile ${SERVER_DIR}/logs/sunkenland_$(date +"%m-%d-%Y-%I-%M-%p").log ${GAME_PARAMS}
-  sleep 2
+  LOGFILE="${SERVER_DIR}/logs/sunkenland_$(date +"%m-%d-%Y-%I-%M-%p").log"
+  xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine ${SERVER_DIR}/Sunkenland-DedicatedServer.exe -nographics -batchmode -logFile "$LOGFILE" ${GAME_PARAMS} >/dev/null 2>&1 &
+  sleep 5
   /opt/scripts/start-watchdog.sh &
-  tail -n 9999 -f ${SERVER_DIR}/logs/sunkenland_$(date +"%m-%d-%Y-%I-%M-%p").log
+  tail -n 9999 -f "$LOGFILE"
 fi

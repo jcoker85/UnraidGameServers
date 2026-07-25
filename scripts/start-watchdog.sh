@@ -1,5 +1,5 @@
 #!/bin/bash
-killpid="$(pidof Sunkenland-DedicatedServer.exe)"
+killpid="$(pidof start.exe)"
 while true
 do
 	tail --pid=$killpid -f /dev/null
